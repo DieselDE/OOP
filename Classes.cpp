@@ -13,10 +13,10 @@ Warrior::Warrior(const string& name): Player(name){
 
 void Warrior::action(vector<Player*>& arena){
     
-    for(int i = 0; i < arena.size(); i++){
+    for(Player*& player : arena){
 
-        if(this->name != arena[i]->name && arena[i]->isAlive()){
-            attacks(*arena[i]);
+        if(player != this && player->isAlive()){
+            attacks(*player);
             return;
         }
     }
@@ -41,7 +41,7 @@ void Vampire::action(vector<Player*>& arena){
     else
         temp = 0;
 
-    for(int i = 0; i < arena.size(); i++){
+    for(int i = 0; i < (int)arena.size(); i++){
 
         if(arena[i]->getHP() > arena[temp]->getHP() && arena[i]->name != this->name)
             temp = i;

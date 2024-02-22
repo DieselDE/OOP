@@ -65,30 +65,34 @@ vector<Player*> readPlayers(){
     return arena;
 }
 
-void printWinner(vector<Player*> arena){
+void printWinner(vector<Player*>& arena) {
 
-    vector<int> winnersPos;
+    double maxHP = 0.0;
+    vector<Player*> winners;
 
-    for(int i = 0; i < (int) arena.size(); i++){
-
-        if(arena[i]->isAlive())
-            winnersPos.push_back(i);
+    for (Player*& p : arena) {
+        if ( p->getHP() > maxHP) {
+            winners.clear();
+            winners.push_back(p);
+            maxHP = p->getHP();
+        }
+        else if (p->getHP() <= maxHP && p->getHP() > 0) {
+            winners.push_back(p);
+        }   
     }
 
-    if(winnersPos.size() == 0){
-        cout << "No Winners" << endl;
-    }
-    else if(winnersPos.size() == 1){
+    if ( winners.size() == 1) {
         cout << "Winner is :" << endl;
-        cout << arena[winnersPos[0]] << endl;
+        cout << "- " << *winners[0] << endl;
     }
-    else{
-        cout << "Winners are:" << endl;
-
-        for(int pos : winnersPos)
-            cout << arena[pos] << endl;
+    else {
+        cout << "Winners are :" << endl;
+        for (Player*& p : winners) {
+            cout << "- " << *p << endl;
+        }
     }
 }
+
 
 void roundAction(vector<Player*>& arena){
 

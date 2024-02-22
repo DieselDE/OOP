@@ -14,7 +14,7 @@ class Warrior : public Player{
 public:
     Warrior(const string&);
 
-    virtual void action(vector<Player*>&) = 0;
+    void action(vector<Player*>&) override;
 
     static void readSettings(ifstream&);
 };
@@ -24,7 +24,7 @@ class Vampire : public Player{
 public:
     Vampire(const string&);
 
-    virtual void action(vector<Player*>&) = 0;
+    void action(vector<Player*>&) override;
 
     static void readSettings(ifstream&);
 };
